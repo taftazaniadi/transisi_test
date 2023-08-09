@@ -5,7 +5,7 @@
 ## Features
 
 - Login Page
-- Home Page
+- List Employee Page
 - Detail Page
 - Create Employees
 
