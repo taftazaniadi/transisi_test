@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:transisi_test/app/routes/pages.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  await GetStorage.init();
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    const MainApp(),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -9,12 +18,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Transisi Test',
+      initialRoute: Pages.INITIAL,
+      getPages: Pages.routes,
     );
   }
 }
