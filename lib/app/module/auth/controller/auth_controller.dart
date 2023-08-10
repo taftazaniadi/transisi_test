@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:transisi_test/app/data/model/auth_model.dart';
 import 'package:transisi_test/app/data/network/api/auth_api.dart';
 import 'package:transisi_test/app/util/process_dialog.dart';
+import 'package:transisi_test/app/util/storage.dart';
 
-class AuthController extends GetxController with StateMixin<LoginAuth> {
+class AuthController extends GetxController with StateMixin {
   final AuthAPI _loginAuth = AuthAPI();
+  final Storage _storage = Storage();
 
   late TextEditingController emailController;
   late TextEditingController passwordController;
@@ -13,6 +14,7 @@ class AuthController extends GetxController with StateMixin<LoginAuth> {
   @override
   void onInit() {
     super.onInit();
+    
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }
@@ -31,7 +33,7 @@ class AuthController extends GetxController with StateMixin<LoginAuth> {
       if (response.statusCode == 200) {
         Get.offNamed('/employee');
 
-        change(response.data, status: RxStatus.success());
+        _storage.saveToken(response.data['token']);
       } else {
         Get.back();
 
@@ -44,6 +46,7 @@ class AuthController extends GetxController with StateMixin<LoginAuth> {
       }
     } catch (e) {
       Get.back();
+
       Get.snackbar(
         'Error',
         e.toString(),

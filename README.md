@@ -6,8 +6,8 @@
 
 - Login Page
 - List Employee Page
-- Detail Page
-- Create Employees
+- Detail Employee Page
+- Create Employee Page
 
 ## APK
 
